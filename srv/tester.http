@@ -1,0 +1,140 @@
+### Get service document //gives all entity sets in your service definition
+http://localhost:4004/odata/v4/CatalogService 
+
+###Get businesspartner entity info
+http://localhost:4004/odata/v4/CatalogService/businesspartner
+
+###get employeeset entity info
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+
+###get gender of employee
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=sex eq 'F'
+
+###get record order by currencycode
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$oderby=Currency_code  desc
+
+###search by some name //gives all records which has usd in it, it many be anything curency country anything
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$search=USD
+
+###removing or deleting a record
+http://localhost:4004/odata/v4/DELETE CatalogService/EmployeeSet('02BD2137-0890-1EEA-A6C2-BB55C19787FB')
+###get purchaseorder entity info
+http://localhost:4004/odata/v4/CatalogService/PurchaseOrder
+
+###get businespartner metadata info
+http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###get single businesspartner details
+http://localhost:4004/odata/v4/CatalogService/businesspartner/74867AD200E41EDBA5D8B06885A56052
+
+###get count of businespartners
+http://localhost:4004/odata/v4/CatalogService/businesspartner/$count
+
+###get top 2 records
+http://localhost:4004/odata/v4/CatalogService/businesspartner?$top=2
+
+###get records skippping 3 records
+http://localhost:4004/odata/v4/CatalogService/businesspartner?$skip=3
+
+###get 5 records after skipping 3 records(it removes top 3 records and gives next 5 records)
+http://localhost:4004/odata/v4/CatalogService/businesspartner?$skip=3&$top=5
+
+###get records by bp role
+http://localhost:4004/odata/v4/CatalogService/businesspartner?$filter=BP_ROLE eq 1
+
+###get records which contains company name
+http://localhost:4004/odata/v4/CatalogService/businesspartner?$filter=contains(COMPANY_NAME,'Talpa')
+
+###get only some properties of entities
+http://localhost:4004/odata/v4/CatalogService/businesspartner?$select=BP_ID,COMPANY_NAME
+
+###get cds view record
+http://localhost:4004/odata/v4/CatalogService/products
+
+###get nested view record where this product was used in which orderid, //only orderid we will get
+http://localhost:4004/odata/v4/CatalogService/products/74867AD200E41EDBA5D8B06B26EB6052/To_Items
+
+###get nested view record together getting orderid and item
+http://localhost:4004/odata/v4/CatalogService/products/74867AD200E41EDBA5D8B06B26EB6052?$expand=To_Items
+
+
+###creating a employee record new one
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{
+     "nameFirst": "john",
+      "nameMiddle": "M",
+      "nameLast": "cina",
+      "nameInitials": null,
+      "sex": "M",
+      "language": "E",
+      "phoneNumber": "+919847484848",
+      "email": "sally.spring@itelo.info",
+      "loginName": "SPRINGS",
+      "Currency_code": "USD",
+      "salaryAmount": 55549,
+      "accountNumber": "111222333",
+      "bankId": "5100006",
+      "bankName": "My Bank of Antioch",
+      "country_code": null
+}
+
+###get the employee data which is created
+http://localhost:4004/odata/v4/CatalogService/EmployeeSet/dd3d0cc2-7577-4f31-a871-dbbbfb3cc7eb
+
+###update the employee data which is just created
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/dd3d0cc2-7577-4f31-a871-dbbbfb3cc7eb
+Content-Type: application/json
+
+{
+    "nameFirst":"vaishnavi",
+    "sex":"F",
+    "salaryAmount":9000000,
+    "Currency_code":"INR"
+
+}
+
+###delete the record which is just created
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/dd3d0cc2-7577-4f31-a871-dbbbfb3cc7eb
+
+
+###get all purchase orders
+http://localhost:4004/odata/v4/CatalogService/PO
+
+###get single purchase order
+http://localhost:4004/odata/v4/CatalogService/PO/74867AD200E41EDBA5D8B0C98DC28052
+
+###get items only for po
+http://localhost:4004/odata/v4/CatalogService/PO/74867AD200E41EDBA5D8B0C98DC28052/Items
+
+###get item togteher lazyloading get both po and items together
+http://localhost:4004/odata/v4/CatalogService/PO/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+###create a new record in purchase order
+POST http://localhost:4004/odata/v4/CatalogService/PO
+Content-Type: application/json
+
+{
+ 
+      "CURRENCY_code": "INR",
+      "GROSS_AMOUNT": "4913.91",
+      "NET_AMOUNT": "6289.00",
+      "TAX_AMOUNT": 624.91,
+      "PO_ID": "300000000",
+      "PARTNER_GUID_NODE_KEY": "74867AD200E41EDBA5D8B06885B04052",
+      "LIFECYCLE_STATUS": "N",
+      "OVERALL_STATUS": "P"
+    }
+
+
+###actions and functions
+
+###creating boost through Action
+POST http://localhost:4004/odata/v4/CatalogService/PO/6a893402-5a55-484e-abbc-a6be9944e117/CatalogService.boost
+Content-Type: application/json
+
+{}
+
+###get largest order function data
+http://localhost:4004/odata/v4/CatalogService/largetsOrder()

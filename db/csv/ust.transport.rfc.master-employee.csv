@@ -1,0 +1,5 @@
+id,name,age,dept_id,street,pincode,book_id
+1,gayathri,24,1,hyd,899,3cb159ae-0b65-4ebc-89df-fd9d59bebf20
+2,vaish,22,2,bnglr,111,3cb159ae-0b65-4ebc-89df-fd9d59bebf20
+3,kavitha,39,1,hyd,222,3cb159ae-0b65-4ebc-89df-fd9d59bebf20
+4,surya,50,2,dadar,445,3cb159ae-0b65-4ebc-89df-fd9d59bebf20
