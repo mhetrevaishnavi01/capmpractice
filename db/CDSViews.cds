@@ -1,4 +1,4 @@
-namespace cappo.cds;
+namespace cappo;
 
 using {vaish.db.master, vaish.db.transaction } from './datamodel';
 
